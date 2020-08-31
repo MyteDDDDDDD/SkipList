@@ -1,32 +1,51 @@
 #include <iostream>
 #include "SkipList.h"
+#include<time.h>
 using namespace std;
 
 int main() {
 	skiplist sk;
 	
-	sk.printAll();
-	for (int i = 0;i < 20;++i) {
-		sk.insert(i);
+	for (int i = 0;i < 50;++i) {// build a skiplist with 50 integers
+		sk.insert(rand());
 	}
 	sk.printAll();
 
-	sk.find(0);
-	sk.find(9);
-	sk.find(20);
+	clock_t start, end;
+	//test time cost with size of 50
+	start = clock();
+	sk.insert(100);
+	end = clock();
+	cout << "it takes "<<double(end - start)/CLOCKS_PER_SEC << " seconds to insert an integer" << endl;
 
-	sk.insert(20);
-	sk.find(20);
+	start = clock();
+	sk.find(100);
+	end = clock();
+	cout << "it takes " << double(end - start) / CLOCKS_PER_SEC << " seconds to find an integer" << endl;
 
-	sk.remove(20);
-	sk.find(20);
+	start = clock();
+	sk.remove(100);
+	end = clock();
+	cout << "it takes " << double(end - start) / CLOCKS_PER_SEC << " seconds to remvoe an integer" << endl;
 
-	sk.remove(0);
-	sk.remove(10);
+	for (int i = 0;i < 50;++i) {//insert 50 more nodes
+		sk.insert(rand());
+	}
+	start = clock();
+	sk.insert(100);
+	end = clock();
+	cout << "it takes "<<double(end - start)/CLOCKS_PER_SEC << " seconds to insert an integer" << endl;
 
-	sk.printAll();
+	start = clock();
+	sk.find(100);
+	end = clock();
+	cout << "it takes " << double(end - start) / CLOCKS_PER_SEC << " seconds to find an integer" << endl;
 
-	
+	start = clock();
+	sk.remove(100);
+	end = clock();
+	cout << "it takes " << double(end - start) / CLOCKS_PER_SEC << " seconds to remvoe an integer" << endl;
+
 	return 0;
 
 
